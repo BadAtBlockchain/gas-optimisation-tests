@@ -11,13 +11,13 @@ contract CounterTest is Test {
         counter = new Counter();
     }
 
-    function testDiv() public {
-        uint256 a = counter.test();
+    function testDivision() public {
+        uint256 a = counter.basicDivision();
         assertEq(a, 5);
     }
 
-    function testShift() public {
-        uint256 a = counter.test2();
+    function testBitShift() public {
+        uint256 a = counter.shiftDivision();
         assertEq(a, 5);
     }
 }
