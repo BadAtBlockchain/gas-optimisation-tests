@@ -4,11 +4,13 @@ pragma solidity ^0.8.13;
 contract Counter {
     uint256 public number;
 
-    function setNumber(uint256 newNumber) public {
-        number = newNumber;
+    function test() public returns (uint256) {
+        uint256 t = 10 / 2;
+        return t;
     }
 
-    function increment() public {
-        number++;
+    function test2() public returns (uint256) {
+        uint256 t = 10 >> 1;
+        return t;
     }
 }
