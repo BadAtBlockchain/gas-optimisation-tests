@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
+import "./mocks/NFTERC721.sol";
+
 contract Loops {
     // Note: standard, normal loop definition
     function loop1() public pure {
@@ -85,34 +87,36 @@ contract Loops {
     }
 
     // Let's actually do something
-    function loopOld() public pure {
+    function loopOld() public {
         for (uint256 i = 0; i < 10; i++) {
-
         }
     }
 
-    function loopOldAction() public pure {
-        for (uint256 i = 0; i < 1000; i++) {
+    function loopOldAction(address _addr) public {
+        for (uint256 i = 0; i < 10; i++) {
+            NFTERC721(_addr).mint(msg.sender);
         }
     }
 
-    function loopNew() public pure {
+    function loopNew() public {
         uint256 i;
         
         do {
             unchecked {
                 ++i;
             }
-        } while(i < 1000);
+        } while(i < 10);
     }
 
-    function loopNewAction() public pure {
+    function loopNewAction(address _addr) public {
         uint256 i;
         
         do {
+            NFTERC721(_addr).mint(msg.sender);
+
             unchecked {
                 ++i;
             }
-        } while(i < 1000);
+        } while(i < 10);
     }
 }
