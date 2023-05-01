@@ -86,6 +86,36 @@ contract Loops {
         }
     }
 
+    // Thanks to @lcfr_eth for the following loop
+    // https://twitter.com/lcfr_eth/status/1653144076898672644
+    function loop8() public pure {
+        assembly {
+            let i := 0
+
+            // Note: we can create a 'do while' type loop here
+            for {} 1 {} {
+                // increment i
+                i := add(i, 1)
+                // when we hit 999, break out the loop
+                if eq(i, 999) { break }
+            }
+
+            // using 3 opcodes, we perform an equal check (returns 1 or 0)
+            // we check if that return was a 1 or 0, which returns a 1 or 0
+            // we then check if that 1 or 0, was greater than 0, if so we failed
+            // this is effectively our require() checks in above loops
+
+            /*
+                one   => if i == 999 ? return 1 : 0 (we should return 1 here)
+                two   => if one == 0 ? return 1 : 0 (we should return 0 here, as above is 1)
+                three => if two > 0  ? return 1 : 0 (we should return 0 and not revert)
+            */
+            if gt(iszero(eq(i, 999)), 0) {
+                revert(0,0)
+            }
+        }
+    }
+
     // Let's actually do something
     function loopOld() public {
         for (uint256 i = 0; i < 10; i++) {

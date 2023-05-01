@@ -25,6 +25,7 @@ contract LoopsTest is Test {
         loops.loop5();
         loops.loop6();
         loops.loop7();
+        loops.loop8();
     }
 
     function testOldVsNew() public {
